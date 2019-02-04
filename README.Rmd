@@ -7,9 +7,9 @@ Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 
 # Part 1: Building a Book
 
-1. (Last word?)
+1. we could not compile the book, so no idea yet.
 
-2. (Biggest problem and solution)
+2. The biggest problem when we building the book is that many library are missing. To resolve it, we need to download it manually. Anothe problem is that 
 
 
 # Part 2: Weather Stations
