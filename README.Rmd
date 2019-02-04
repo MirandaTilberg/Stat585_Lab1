@@ -2,7 +2,27 @@
 title: "Lab 1, Team 5"
 output: html_document
 ---
-#Weather Station 
+
+Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
+
+# Part 1: Building a Book
+
+1. (Last word?)
+
+2. (Biggest problem and solution)
+
+
+# Part 2: Weather Stations
+
+1. Plot
+
+
+2. Number of files
+
+
+
+
+
 1. read the file
 ```{r, warning = F, message = F}
 library(tidyverse)
