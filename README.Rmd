@@ -1,11 +1,13 @@
 ---
 title: "Lab 1, Team 5"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 
-# Part 1: Building a Book
+# Building a Book
 
 1. we could not compile the book, so no idea yet.
 
@@ -14,18 +16,12 @@ Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 * while running the condition.rmd file, we have a problem with running the `expect_s3_class(err, "error_bad_argument")`. recommend by the instructor, we use `#` to mask line 786-788. 
 * using non-standerize package, $emo$, solution: run `devtools::install_github("hadley/emo")`
 
-# Part 2: Weather Stations
+# Weather Stations
 
 1. Plot
 
+We begin by loading the appropriate packages and reading in the data. 
 
-2. Number of files
-
-
-
-
-
-1. read the file
 ```{r, warning = F, message = F}
 library(tidyverse)
 library(ggplot2)
@@ -36,17 +32,16 @@ library(mapdata)
 weather <- read_fwf("ushcn-v2.5-stations.txt", 
                     fwf_positions(c(1,3,4,6,13,22,33,39,42,94),
                                   c(2,3,5,11,20,30,37,40,71,95), 
-                    col_names=c("COUNTRY", "NETWORK", "ID_PLACEHOLDERS",
+                    col_names = c("COUNTRY", "NETWORK", "ID_PLACEHOLDERS",
                                 "COOP_ID", "LATITUDE", "LONGITUDE",
                                 "ELEVATION", "STATE", "NAME", "TimeZone")),
-                    col_types = cols("c","c","c","c",
-                                     "d","d","d",
-                                     "c","c","i"))
+                    col_types = cols("c","c","c","c","d",
+                                     "d","d","c","c","i"))
 head(weather)
-
 ```
 
-2. Set TimeZone as a factor and rename the levels in TimeZone
+For convenience, we turn the timezone variable into a factor with meaningful labels.
+
 ```{r}
 weather$TimeZone <- as.factor(weather$TimeZone)
 levels(weather$TimeZone) = c("ETS", "CTS","MTS","PTS")
@@ -57,10 +52,13 @@ levels(weather$TimeZone) = c("ETS", "CTS","MTS","PTS")
 ```{r,fig.height=10}
 states <- map_data("state")
 ggplot(data = states) + 
-  geom_polygon(aes(x = long, y = lat, group = group), color = "grey",alpha = 0.6) + 
+  geom_polygon(aes(x = long, y = lat, group = group),
+               color = "grey", alpha = 0.6) + 
+  geom_point(data = weather,aes(x = LONGITUDE, y = LATITUDE,
+                              color = (ELEVATION), shape = TimeZone)) +
+  theme_bw() +
   coord_fixed(1.3) +
-  guides(fill=FALSE)+
-  geom_point(data=weather,aes(x=LONGITUDE,y=LATITUDE,color=(ELEVATION),shape=TimeZone))
+  guides(fill = FALSE)
 
 ```
 
@@ -70,6 +68,8 @@ ggplot(data = states) +
 #gunzip("ushcn.tavg.latest.raw.tar.gz")
 #untar("ushcn.tavg.latest.raw.tar")
 ```
+
+2. Number of files
 
 2. Count the number of files
 ```{r}
