@@ -12,7 +12,7 @@ Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 1. "pseudo-class"
 
 2. 
-* The biggest problem when we building the book is that many library are missing. To resolve it, we need to download it manually. At the mean time, I write a script for scrapping the string that are possible the library name. and then download them as well as the dependend libraries. The functionality of the code show it can efficiently and effecively verifies whether the 84 required libraries are installed. For those have not been downloaded, the script also attemp to install them.
+* The biggest problem when we building the book is that many library are missing. To resolve it, we need to download it manually. At the mean time, I write a script for scrapping the string that are possible the library name. and then download them as well as the dependend libraries. The functionality of the code show it can efficiently and effecively verifies whether all required libraries are installed. For those have not been downloaded, the script also attemp to install them.
 
 ```{R Libraryscrapping, eval = FALSE}
 # Libraryscrapping.r
