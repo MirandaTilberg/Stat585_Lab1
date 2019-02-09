@@ -1,4 +1,4 @@
-# Libraryscrapping.r
+# Libraryscraping.r
 # scrpping required libraries in the wd and install
 
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
