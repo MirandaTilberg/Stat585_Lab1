@@ -9,7 +9,7 @@ Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 
 # Building a Book
 
-1. we could not compile the book, so no idea yet.
+1. We have not been able to compile the book (see notes below), so we can't deliver the last word of Ch. 15 `r emo::ji("sad")`
 
 2. 
 * The biggest problem when we building the book is that many library are missing. To resolve it, we need to download it manually.
