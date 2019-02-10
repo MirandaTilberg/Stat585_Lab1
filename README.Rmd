@@ -13,7 +13,7 @@ Find our Lab 1 repository [here](https://github.com/MirandaTilton/Stat585_Lab1)
 1. "pseudo-class"
 
 2. 
-* The biggest problem we had when building the book was that there were many required packages that we did not have installed on our machines. To resolve this problem, we downloaded the packages manually. I (Weiquan) wrote a script for scraping the strings that are possible library names and then downloaded them, as well as the dependend libraries. The functionality of the code shows that it efficiently and effectively verifies whether all required libraries have been installed. For those have not been downloaded, the script also attempts to install them.
+* The biggest problem we had when building the book was that there were many required packages that we did not have installed on our machines. To resolve this problem, we downloaded the packages manually. I (Weiquan) wrote a script for scraping the strings that are possible library names and then downloaded them, as well as the dependent libraries. The functionality of the code shows that it efficiently and effectively verifies whether all required libraries have been installed. For those have not been downloaded, the script also attempts to install them.
 
 ```{R Libraryscrapping, eval = FALSE}
 # Libraryscrapping.r
@@ -60,9 +60,9 @@ for (name.packages in package.required) {
   else {print(paste("library installed",name.packages))}
 }
 ```
-* while running the condition.rmd file, we have a problem with running the `expect_s3_class(err, "error_bad_argument")`. recommend by the instructor, we use `#` to mask line 786-788. 
-* using non-standerize package, $emo$, solution: run `devtools::install_github("hadley/emo")`
-* The Rcpp.Rmd require installation of a external tool for C++. Solution for right now is to not evaluate the r chunk in Rcpp.Rmd
+* While running the condition.rmd file, we had a problem with running the `expect_s3_class(err, "error_bad_argument")`. As recommended by the instructor, we masked lines 786-788 by commenting them out. 
+* Another problem was installing the non-CRAN package, $emo$. Our solution: run `devtools::install_github("hadley/emo")`
+* The Rcpp.Rmd required the installation of an external tool for C++. One solution was to not evaluate the r chunk in Rcpp.Rmd (Weiquan), and the other was to re-install R (Miranda).
 
 
 # Weather Stations
@@ -121,6 +121,7 @@ ggplot(data = states) +
 2. Count the number of files
 ```{r}
 length(list.files("ushcn.v2.5.5.20190130"))
+# Result is 1218
 ```
 
 3. The coordinates of Fort Dodge, IA are (42.506803,94.180271). We search the weather data for this cordinate.
