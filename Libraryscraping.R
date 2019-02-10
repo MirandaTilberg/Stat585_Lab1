@@ -4,7 +4,10 @@
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 rm(list=ls())
 dev.off()
+
+
 library(stringr)
+library(tools)
 
 # multiple input
 temp.Rmd = list.files(pattern="*.Rmd$")
@@ -14,32 +17,28 @@ for (i in 1:length(temp.Rmd)){
 }
 
 # extract library name
-stock1 <- grep("^library\\(.*\\)$", temp.name, value = T)
+## key1 ="^library\\(.*\\)$"
+stock1 <- grep("^library\\([[:alpha:]]+\\)$", temp.name, value = T)
 stock1 <- gsub("library\\(","", stock1)
+stock1 <- sapply(strsplit(stock1, split='[^[:alpha:]]', perl=TRUE), function(x) (tail(x, n=1)))
 
-stock2 <- str_extract_all(temp.name,"[^[:alpha:]]*[[:alpha:]]+[::]{2}[[:alpha:]]+[[:punct:]]?", simplify =T)
-stock2 <- as.character(as.vector(stock2))
-stock1 <- sapply(strsplit(stock1, split='[^[:alpha:]]', perl=TRUE), function(x) (tail(x, n=1))) # last one
+## key2 ="[^[:alpha:]]*[[:alpha:]]+[::]{2}[[:alpha:]]+[[:punct:]]?"
+stock2 <- as.character(as.vector(str_extract_all(temp.name,"[^[:alpha:]]*[[:alpha:]]+[::]{2}[[:alpha:]]+[[:punct:]]?", simplify =T)))
 stock2 <- sapply(strsplit(stock2, split='::', fixed=TRUE), function(x) (x[1]))
-stock2 <- sapply(strsplit(stock2, split='[^[:alpha:]]', perl=TRUE), function(x) (tail(x, n=1))) # last one
+stock2 <- sapply(strsplit(stock2, split='[^[:alpha:]]', perl=TRUE), function(x) (tail(x, n=1)))
 
 # construct charator vector
-package.required <- append(stock1,stock2)
-package.required <-unique(package.required)
+package.required <- unique(append(stock1,stock2))
 
 # Extend to dependent library
-package.required <- as.vector(unlist(package_dependencies(package.required)))
-package.required <-unique(package.required)
-
+package.required <- unique(as.vector(unlist(package_dependencies(package.required))))
 package.required <- package.required[package.required!=("")]
 package.required <- package.required[!is.na(package.required)]
 
 # install package
 print(package.required)
-
 for (name.packages in package.required) {
   if(!is.element(name.packages, installed.packages()[,1])){
-    install.packages(name.packages)
-  print(paste("library installed",name.packages))}
+    install.packages(name.packages)}
   else {print(paste("library installed",name.packages))}
 }
